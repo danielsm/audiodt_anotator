@@ -1,0 +1,20 @@
+{
+    "name": "audiodtanotator",
+    "version": "0.0.0",
+    "description": "Audio Dataset Anotator Tool",
+    "main": "./src/index.js",
+    "scripts": {
+        "start": "electron .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Daniel Moraes",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^13.1.4"
+    },
+    "dependencies": {
+        "bootstrap": "^5.0.2",
+        "fs": "0.0.1-security",
+        "glob": "^7.1.7"
+    }
+}
