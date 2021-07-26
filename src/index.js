@@ -44,6 +44,17 @@ app.on('window-all-closed', function() {
 // In this file you can include the rest of your app's specific main process
 // code. Você também pode colocar eles em arquivos separados e requeridos-as aqui.
 
+/*EVENTOS DE COMUNICAÇÃO ENTRE OS PROCESSOS*/
+//inicia varios envento de escuta para definir os valores das variaveis 
+ipcMain.on("toMain", (event, args) => {
+	path_dir = args[0]
+	list_files = args[1]
+});
+
+ipcMain.on("fromMain", (event, args) => {
+	event.returnValue = [path_dir, list_files]
+});
+
 ipcMain.on('show-open-dialog', (event, arg) => {
     save_dir = dialog.showOpenDialogSync({
         properties: ['openDirectory'] //Apenas diretorios podem ser enxergados pela janela de dialogo

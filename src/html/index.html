@@ -10,18 +10,67 @@
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Hello World!</title>
     <!--Bootstrap JS -->
-    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <!-- Custom styles for this template -->
     <link href="../css/cover.css" rel="stylesheet">
-
-    <script defer src="../js/dirHandler.js"></script>
+    <script src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script defer src="./../../node_modules/bootstrap-icons/font/bootstrap-icons.css"></script>
 </head>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
+<body class="d-flex text-center text-white bg-secondary">
+    <div class="cover-container d-flex w-100 p-3 mx-auto flex-column bg-dark rounded center-square">
+        
+        <main class="px-3">
+            <form>
+                <div class="row mb-3">
+                    <label for="Name" class="col-sm-2 col-form-label">Nome do Dataset:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="dtName" placeholder="Digite o nome">
+                    </div>  
+                </div>
+    
+                <div class="row mb-3">
+                    <label for="Arquivos" class="col-sm-2 col-form-label">Diretório dos Áudios:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="dirPath" placeholder="./" disabled>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="fileSelecter" type="button" class="btn btn-primary float-start">Escolha o diretório</button>
+                    </div>
+                </div>
+    
+                <div class="row mb-3">
+                    <label for="NumClasses" class="col-sm-2 col-form-label">Número de classes:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="numClasses" placeholder="[0-9]*">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="Classes" class="col-sm-2 col-form-label">Classes:</label>
+                    <div class="col-sm-6" id="classes">
+                        <input type="text" class="form-control" id="dtClasses" placeholder="Digite as classes">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" id="addClass" class="btn btn-primary float-start">Adicionar Classe</button>
+                    </div>
+                </div>
 
-    <button id="fileSelecter" type="button" class="btn btn-primary">Escolha o diretório</button>
+                <div class="row mb-3 col-sm-6 addClasses" id='addedClasses'>
+                    <!-- <label for="AddClasses" class="col-sm-2 col-form-label">Classes Adicionadas:</label> -->
+                </div>
+                
+                <button type="button" id="begin" class="btn btn-primary col-sm-3">Iniciar</button>
+            </form>
+        </main>
+        
+    </div>
+    <!-- <button id="fileSelecter" type="button" class="btn btn-primary">Escolha o diretório</button>
     <input type="text" class="form-control input-group-text label" id="dirPath" placeholder="./" disabled>
 
+
+    <button id="begin" type="button" class="btn btn-primary">Iniciar</button> -->
+  
+    <script defer src="../js/home.js"></script>
 </body>
 
 </html>
