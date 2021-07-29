@@ -3,22 +3,28 @@ const fs = require('fs')
 const glob = require('glob').Glob
 
 
+var classes = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    var save_dir = document.getElementById('fileSelecter');
-    var dirPath = document.getElementById("dirPath");
-    var begin = document.getElementById('begin');
-    var addClass = document.getElementById('addClass');
-    
+    let dtName = document.getElementById('dtName');
+    let dirPath = document.getElementById("dirPath");
+    let save_dir = document.getElementById('fileSelecter');
+    let dtClasses = document.getElementById('dtClasses');
+    let addClass = document.getElementById('addClass');
+    let begin = document.getElementById('begin');
+
+  
+
+
     save_dir.addEventListener('click', () => {
         
-        var dir = ipcRenderer.sendSync('show-open-dialog', ""); //[String] Faz uma requisicao ao script principal
+        let dir = ipcRenderer.sendSync('show-open-dialog', ""); //[String] Faz uma requisicao ao script principal
 
         if (dir != undefined) {
             //Caso algum diretorio tenha sido corretamente selecionado
             dirPath.value = dir;
         }
-        var path = dir[0]
+        let path = dir[0]
         console.log(path)
         if (fs.lstatSync(path).isDirectory()) {
             //itera sobre todos os arquivos .wav do diretorio obtido
@@ -27,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(files)
                 if (files.length > 0) {
                     //Envia a lista dos arquivos .wav para o processo principal
-                    ipcRenderer.send('toMain', [path, files]);
+                    ipcRenderer.send('setListFiles', [path, files]);
                     // //Vai para a pagina de informações do diretorio
                     // window.location.replace("../html/infopage.html")
                 } else {
@@ -40,25 +46,57 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     begin.addEventListener('click', () =>  {
-        var dtName = document.getElementById('dtName').value;
-        var dirPath = document.getElementById('dirPath').value;
-        var numClasses = document.getElementById('numClasses').value;
-        var dtClasses = document.getElementById('dtClasses').value;
         //debugger
         console.log("Begin..");
-        
-        //if (dirPath != ''){
-            window.location.replace("../html/playlist.html")
-        //}
-        
+        if (dtName.value == ""){
+            let msg = document.getElementById("nameMsg");
+            msg.hidden = false;
+            dtName.required = true;
+        }
+        else{
+            let msg = document.getElementById("nameMsg");
+            msg.hidden = true;
+            dtName.required = false;
+        }
+        if (dirPath.value == ""){
+            let msg = document.getElementById("dirMsg");
+            msg.hidden = false;
+            dirPath.required = true;
+        }
+        else{
+            let msg = document.getElementById("dirMsg");
+            msg.hidden = true;
+            dirPath.required = false;
+        }
+       
+        if (classes.length < 1){
+            let msg = document.getElementById("classMsg1");
+            msg.hidden = false;
+            let msg2 = document.getElementById("classMsg2");
+            msg2.hidden = true;
+            dtClasses.required = true;
+        }
+        else{
+            let msg = document.getElementById("classMsg1");
+            msg.hidden = true;
+            let msg2 = document.getElementById("classMsg2");
+            msg2.hidden = true;
+            dtClasses.required = false;
+        }
+        if (dtName.value != "" && dirPath.value != "" && classes.length > 0){
+            ipcRenderer.send('setClasses', classes);
+            window.location.replace("../html/playlist.html");
+        }  
     });
 
     addClass.addEventListener('click', () =>  {
-        var dtClasses = document.getElementById('dtClasses').value;
-        var addedClasses = document.getElementById('addedClasses');
+       
+        let addedClasses = document.getElementById('addedClasses');
         
 
-        if (dtClasses != ''){
+        if (dtClasses.value != ''){
+
+            classes.push(dtClasses.value);
             var pos = addedClasses.childElementCount;
 
             var divNova = document.createElement("div");
@@ -69,21 +107,41 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.add("btn", "btn-danger","mb-1", "me-2");
             button.type = "button";
             button.id = "buttonClass" + pos;
+            button.setAttribute("data-toogle", "tooltip");
+            button.setAttribute("data-placement","top");
+            button.setAttribute("title","Excluir essa classe");
             button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle mb-1" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg>'
             divNova.appendChild(button);
             
-            var text = document.createTextNode(dtClasses);
+            var text = document.createTextNode(dtClasses.value);
             divNova.appendChild(text);
             addedClasses.appendChild(divNova)
             document.getElementById('dtClasses').value = "";
-            
-            button.onclick = () => removeClass(divNova.id);
+           
+            let msg = document.getElementById("classMsg2");
+            msg.hidden = true;
+            dtClasses.required = false;
+
+            button.onclick = () => removeClass(divNova.id, text.nodeValue);
+        }
+        else{
+            let msg1 = document.getElementById("classMsg1");
+            msg1.hidden = true;
+            let msg = document.getElementById("classMsg2");
+            msg.hidden = false;
+            dtClasses.required = true;
         }
     });
 })
 
-function removeClass(id){
+//remove da interface e do vetor uma classe adicionada anteriormente
+function removeClass(id, classe){
     var el = document.getElementById(id);
-    //debugger
+ 
+    for (let i=0; i< classes.length;i++){
+        if (classes[i] == classe){
+            classes.splice(i,1);
+        }
+    }
     el.remove();
 }

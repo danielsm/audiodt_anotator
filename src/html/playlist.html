@@ -13,43 +13,44 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/cover.css" rel="stylesheet">
-
+    <script src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
-<body class="d-flex text-center text-white bg-secondary">
-    <div class="container-fluid d-flex w-100 p-3 mx-auto flex-column bg-dark rounded center-square">
+<body class="d-flex text-center text-white bg-info bg-gradient">
+    <div class="cover-container d-flex w-100 p-3 mx-auto flex-column bg-dark rounded center-square">
 
         <main class="px-3">
-            <div class="d-flex flex-column justify-content-center mt-3 mb-3" id="waveform"></div>
-            <div class="d-flex flex-column justify-content-center mb-3 list-group" id="playlist">
+
+            <div class="d-flex flex-column justify-content-center mb-3 d-grid" id="playlist">
                 <!-- Audios -->
-                <input type="button" value="PLAY" id="play">
-                <audio id="musica" src="D:\Documentos\audios\airport-barcelona-0-0-a.wav"></audio>
 
             </div>
-            <div class="p-2 destaque label npage"></div>
-            <!-- <div class="col-sm-2">
-                <button class="btn btn-success btn-block" id="playPause">
-                    <span id="play">
-                        <i class="glyphicon glyphicon-play"></i>
-                        Play
-                    </span>
 
-                    <span id="pause" style="display: none">
-                        <i class="glyphicon glyphicon-pause"></i>
-                        Pause
-                    </span>
-                </button>
-            </div> -->
+            <div class="row d-flex mb-3 d-grid">
+                <div class="col-sm-7 pe-5 d-flex justify-content-end">
+                    <button class="btn" type="button" id="prev">
+                        <img src="../../assets/arrow-left.svg" alt="home" width="30" height="24"
+                            class="d-inline-block align-text-middle">
+                    </button>
+
+                    <div class="p-2 destaque label npage"></div>
+
+                    <button class="btn" type="button" id="next">
+                        <img src="../../assets/arrow-right.svg" alt="home" width="30" height="24"
+                            class="d-inline-block align-text-middle">
+                    </button>
+                </div>
+
+
+                <div class="col-sm-5 d-flex flex-row-reverse">
+                    <button id="savePage" type="button" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+
         </main>
 
     </div>
-    <!-- <button id="fileSelecter" type="button" class="btn btn-primary">Escolha o diretório</button>
-    <input type="text" class="form-control input-group-text label" id="dirPath" placeholder="./" disabled>
 
-
-    <button id="begin" type="button" class="btn btn-primary">Iniciar</button> -->
-    <script src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script defer src="../js/playlist.js"></script>
 </body>
 

@@ -32,6 +32,7 @@ body {
   
 }
 
+
 .cover-container {
 
   max-width: 75em;
@@ -44,6 +45,10 @@ body {
 .addClasses {
   margin-left: 12em;
   text-align: left !important;
+}
+
+.select-custom{
+  max-width: 3em;
 }
 /*
  * Header
@@ -69,4 +74,20 @@ body {
 .nav-masthead .active {
   color: #fff;
   border-bottom-color: #fff;
+}
+
+input:invalid {
+  border: 2px solid red;
+}
+
+input:valid {
+  border: 2px solid black;
+}
+
+.form-text {
+  color:red;
+}
+
+#classMsg2 {
+  width: 45% !important;
 }

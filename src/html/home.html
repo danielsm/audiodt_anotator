@@ -1,4 +1,4 @@
-<!--index.html-->
+<!--home.html-->
 
 <!DOCTYPE html>
 <html>
@@ -14,62 +14,61 @@
     <!-- Custom styles for this template -->
     <link href="../css/cover.css" rel="stylesheet">
     <script src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script defer src="./../../node_modules/bootstrap-icons/font/bootstrap-icons.css"></script>
 </head>
 
-<body class="d-flex text-center text-white bg-secondary">
+<body class="d-flex text-center text-white bg-info bg-gradient">
     <div class="cover-container d-flex w-100 p-3 mx-auto flex-column bg-dark rounded center-square">
-        
         <main class="px-3">
             <form>
                 <div class="row mb-3">
                     <label for="Name" class="col-sm-2 col-form-label">Nome do Dataset:</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="dtName" placeholder="Digite o nome">
-                    </div>  
+                        <input type="text" class="form-control" id="dtName" placeholder="Digite o nome"
+                            data-toggle="tooltip" data-placement="top" title="O nome desejado para o dataset">
+                    </div>
+                    <small id="nameMsg" class="form-text w-50 ms-3 ps-3" hidden>O nome do Dataset é obrigatório</small>
                 </div>
-    
+
                 <div class="row mb-3">
                     <label for="Arquivos" class="col-sm-2 col-form-label">Diretório dos Áudios:</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="dirPath" placeholder="./" disabled>
+                        <input type="text" class="form-control" id="dirPath" placeholder="./" data-toggle="tooltip"
+                            data-placement="top" title="Caminho para o diretório dos áudios" disabled>
                     </div>
-                    <div class="col-sm-2">
-                        <button id="fileSelecter" type="button" class="btn btn-primary float-start">Escolha o diretório</button>
+                    <div class="col-sm-3">
+                        <button id="fileSelecter" type="button" class="btn btn-primary float-start">Escolha o
+                            diretório</button>
                     </div>
+                    <small id="dirMsg" class="form-text w-50 ms-2 ps-5" hidden>Um diretório precisa ser
+                        selecionado</small>
                 </div>
-    
-                <div class="row mb-3">
-                    <label for="NumClasses" class="col-sm-2 col-form-label">Número de classes:</label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" id="numClasses" placeholder="[0-9]*">
-                    </div>
-                </div>
+
                 <div class="row mb-3">
                     <label for="Classes" class="col-sm-2 col-form-label">Classes:</label>
                     <div class="col-sm-6" id="classes">
-                        <input type="text" class="form-control" id="dtClasses" placeholder="Digite as classes">
+                        <input type="text" class="form-control" id="dtClasses" placeholder="Digite as classes"
+                            data-toggle="tooltip" data-placement="top" title="As classes a serem usadas na anotação">
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" id="addClass" class="btn btn-primary float-start">Adicionar Classe</button>
+                        <button type="button" id="addClass" class="btn btn-primary float-start">Adicionar
+                            Classe</button>
                     </div>
+                    <small id="classMsg1" class="form-text w-50 ms-5 ps-4" hidden>Pelo menos uma classe precisa ser
+                        adicionada</small>
+                    <small id="classMsg2" class="form-text w-50" hidden>Digite uma classe</small>
                 </div>
 
                 <div class="row mb-3 col-sm-6 addClasses" id='addedClasses'>
-                    <!-- <label for="AddClasses" class="col-sm-2 col-form-label">Classes Adicionadas:</label> -->
+
                 </div>
-                
+
                 <button type="button" id="begin" class="btn btn-primary col-sm-3">Iniciar</button>
             </form>
         </main>
-        
+
     </div>
-    <!-- <button id="fileSelecter" type="button" class="btn btn-primary">Escolha o diretório</button>
-    <input type="text" class="form-control input-group-text label" id="dirPath" placeholder="./" disabled>
 
 
-    <button id="begin" type="button" class="btn btn-primary">Iniciar</button> -->
-  
     <script defer src="../js/home.js"></script>
 </body>
 

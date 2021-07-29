@@ -14,8 +14,8 @@ function createWindow() {
         }
     })
 
-    // and load the index.html of the app.
-    mainWindow.loadFile('./src/html/index.html')
+    // and load the home.html of the app.
+    mainWindow.loadFile('./src/html/home.html')
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
@@ -46,14 +46,24 @@ app.on('window-all-closed', function() {
 
 /*EVENTOS DE COMUNICAÇÃO ENTRE OS PROCESSOS*/
 //inicia varios envento de escuta para definir os valores das variaveis 
-ipcMain.on("toMain", (event, args) => {
+ipcMain.on("setListFiles", (event, args) => {
 	path_dir = args[0]
 	list_files = args[1]
 });
 
-ipcMain.on("fromMain", (event, args) => {
+
+ipcMain.on("getListFiles", (event, args) => {
 	event.returnValue = [path_dir, list_files]
 });
+
+ipcMain.on("setClasses", (event, args) => {
+	classes = args
+});
+
+ipcMain.on("getClasses", (event, args) => {
+	event.returnValue = classes
+});
+
 
 ipcMain.on('show-open-dialog', (event, arg) => {
     save_dir = dialog.showOpenDialogSync({
