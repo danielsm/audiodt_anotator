@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     begin.addEventListener('click', () =>  {
         //debugger
+        localStorage.clear();
         console.log("Begin..");
         if (dtName.value == ""){
             let msg = document.getElementById("nameMsg");
