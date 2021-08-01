@@ -32,7 +32,6 @@ body {
   
 }
 
-
 .cover-container {
 
   max-width: 75em;
@@ -75,6 +74,18 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link{
+  font-weight: bold;
+  color: #ffff;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  color: black;
+  background-color:#ffff;
+  font-weight: bold;
+}
+
 
 input:invalid {
   border: 2px solid red;

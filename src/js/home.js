@@ -5,45 +5,21 @@ const glob = require('glob').Glob
 
 var classes = [];
 
+
 document.addEventListener('DOMContentLoaded', function() {
     let dtName = document.getElementById('dtName');
     let dirPath = document.getElementById("dirPath");
-    let save_dir = document.getElementById('fileSelecter');
+    let load_dir1 = document.getElementById('fileSelecter');
     let dtClasses = document.getElementById('dtClasses');
     let addClass = document.getElementById('addClass');
     let begin = document.getElementById('begin');
+    let carregarBt = document.getElementById("carregar-tab");
 
-  
 
+    // Formulário de Nova anotação
 
-    save_dir.addEventListener('click', () => {
-        
-        let dir = ipcRenderer.sendSync('show-open-dialog', ""); //[String] Faz uma requisicao ao script principal
-
-        if (dir != undefined) {
-            //Caso algum diretorio tenha sido corretamente selecionado
-            dirPath.value = dir;
-        }
-        let path = dir[0]
-        console.log(path)
-        if (fs.lstatSync(path).isDirectory()) {
-            //itera sobre todos os arquivos .wav do diretorio obtido
-            glob(path + '/**/*.wav', {}, (err, files) => {
-                //Confirma se há arquivos desse formato
-                console.log(files)
-                if (files.length > 0) {
-                    //Envia a lista dos arquivos .wav para o processo principal
-                    ipcRenderer.send('setListFiles', [path, files]);
-                    // //Vai para a pagina de informações do diretorio
-                    // window.location.replace("../html/infopage.html")
-                } else {
-                    //Abre um modal informando que nao há arquivos .wav no diretorio
-                    // $("#notWAV").modal('show');
-                }
-            })
-        }
-
-    });
+    // Botão de escolher diretório dos audios
+    load_dir1.onclick = () => loadDir();
 
     begin.addEventListener('click', () =>  {
         //debugger
@@ -86,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (dtName.value != "" && dirPath.value != "" && classes.length > 0){
             ipcRenderer.send('setClasses', classes);
+            localStorage.setItem("name",dtName.value);
+            localStorage.setItem(dtName.value+"_classes",classes);
             window.location.replace("../html/playlist.html");
         }  
     });
@@ -93,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
     addClass.addEventListener('click', () =>  {
        
         let addedClasses = document.getElementById('addedClasses');
-        
 
         if (dtClasses.value != ''){
 
@@ -133,6 +110,32 @@ document.addEventListener('DOMContentLoaded', function() {
             dtClasses.required = true;
         }
     });
+
+    //Formulário de Carregar Anotação
+    carregarBt.addEventListener('click', () =>  {
+        
+        let nome = localStorage.getItem("name");
+        if (nome){
+            let recentDiv = document.getElementById("recentes");
+            let newD = document.createElement("div");
+            newD.classList.add("col-sm-3");
+            let bt = document.createElement("button");
+            bt.setAttribute("id", nome+"Bt");
+            bt.setAttribute("type","button");
+            bt.classList.add("btn", "btn-success", "float-start");
+            bt.innerText = nome;
+        
+            newD.appendChild(bt);
+            recentDiv.appendChild(newD);
+            
+            bt.onclick = () =>  loadFromStorage(nome);
+        }
+    });
+
+    
+    
+   
+
 })
 
 //remove da interface e do vetor uma classe adicionada anteriormente
@@ -145,4 +148,48 @@ function removeClass(id, classe){
         }
     }
     el.remove();
+}
+
+function loadFromStorage(nome){
+    debugger
+    classes = localStorage.getItem(nome+"_classes");
+    classes = classes.split(',');
+    let path = localStorage.getItem("path");
+    let files = localStorage.getItem("files_list");
+    files = files.split(',');
+    if (classes){
+
+        ipcRenderer.send('setListFiles', [path, files]);
+        ipcRenderer.send('setClasses', classes);
+        window.location.replace("../html/playlist.html");
+    }
+}
+
+function loadDir(){
+    let dir = ipcRenderer.sendSync('show-open-dialog', ""); //[String] Faz uma requisicao ao script principal
+
+    if (dir != undefined) {
+        //Caso algum diretorio tenha sido corretamente selecionado
+        dirPath.value = dir;
+    }
+    let path = dir[0]
+    //console.log(path)
+    if (fs.lstatSync(path).isDirectory()) {
+        //itera sobre todos os arquivos .wav do diretorio obtido
+        glob(path + '/**/*.wav', {}, (err, files) => {
+            //Confirma se há arquivos desse formato
+            //console.log(files)
+            if (files.length > 0) {
+                //Envia a lista dos arquivos .wav para o processo principal
+                console.log(path,files);
+                ipcRenderer.send('setListFiles', [path, files]);
+                
+                // //Vai para a pagina de informações do diretorio
+                // window.location.replace("../html/infopage.html")
+            } else {
+                //Abre um modal informando que nao há arquivos .wav no diretorio
+                // $("#notWAV").modal('show');
+            }
+        })
+    }
 }

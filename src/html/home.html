@@ -16,57 +16,107 @@
     <script src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
-<body class="d-flex text-center text-white bg-info bg-gradient">
-    <div class="cover-container d-flex w-100 p-3 mx-auto flex-column bg-dark rounded center-square">
-        <main class="px-3">
-            <form>
-                <div class="row mb-3">
-                    <label for="Name" class="col-sm-2 col-form-label">Nome do Dataset:</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="dtName" placeholder="Digite o nome"
-                            data-toggle="tooltip" data-placement="top" title="O nome desejado para o dataset">
-                    </div>
-                    <small id="nameMsg" class="form-text w-50 ms-3 ps-3" hidden>O nome do Dataset é obrigatório</small>
-                </div>
+<body class="d-flex text-center text-white bg-light bg-gradient">
 
-                <div class="row mb-3">
-                    <label for="Arquivos" class="col-sm-2 col-form-label">Diretório dos Áudios:</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="dirPath" placeholder="./" data-toggle="tooltip"
-                            data-placement="top" title="Caminho para o diretório dos áudios" disabled>
-                    </div>
-                    <div class="col-sm-3">
-                        <button id="fileSelecter" type="button" class="btn btn-primary float-start">Escolha o
-                            diretório</button>
-                    </div>
-                    <small id="dirMsg" class="form-text w-50 ms-2 ps-5" hidden>Um diretório precisa ser
-                        selecionado</small>
-                </div>
+    <div class="cover-container d-flex w-100 p-3 mx-auto flex-column bg-dark rounded">
+        <div class="container d-flex row mb-2">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="novo-tab" data-bs-toggle="tab" data-bs-target="#novo"
+                        type="button" role="tab" aria-controls="novo" aria-selected="true">Nova Anotação</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="carregar-tab" data-bs-toggle="tab" data-bs-target="#carregar"
+                        type="button" role="tab" aria-controls="carregar" aria-selected="false">Carregar
+                        Anotação</button>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content pt-3">
+            <div class="tab-pane fade show active" id="novo" role="tabpanel" aria-labelledby="novo-tab">
+                <main class="px-3">
+                    <form>
+                        <div class="row mb-3">
+                            <label for="Name" class="col-sm-2 col-form-label">Nome do Dataset:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="dtName" placeholder="Digite o nome"
+                                    data-toggle="tooltip" data-placement="top" title="O nome desejado para o dataset">
+                            </div>
+                            <small id="nameMsg" class="form-text w-50 ms-3 ps-3" hidden>O nome do Dataset é
+                                obrigatório</small>
+                        </div>
 
-                <div class="row mb-3">
-                    <label for="Classes" class="col-sm-2 col-form-label">Classes:</label>
-                    <div class="col-sm-6" id="classes">
-                        <input type="text" class="form-control" id="dtClasses" placeholder="Digite as classes"
-                            data-toggle="tooltip" data-placement="top" title="As classes a serem usadas na anotação">
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="button" id="addClass" class="btn btn-primary float-start">Adicionar
-                            Classe</button>
-                    </div>
-                    <small id="classMsg1" class="form-text w-50 ms-5 ps-4" hidden>Pelo menos uma classe precisa ser
-                        adicionada</small>
-                    <small id="classMsg2" class="form-text w-50" hidden>Digite uma classe</small>
-                </div>
+                        <div class="row mb-3">
+                            <label for="Arquivos" class="col-sm-2 col-form-label">Diretório dos Áudios:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="dirPath" placeholder="./"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="Caminho para o diretório dos áudios" disabled>
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="fileSelecter" type="button" class="btn btn-primary float-start">Escolha o
+                                    diretório</button>
+                            </div>
+                            <small id="dirMsg" class="form-text w-50 ms-2 ps-5" hidden>Um diretório precisa ser
+                                selecionado</small>
+                        </div>
 
-                <div class="row mb-3 col-sm-6 addClasses" id='addedClasses'>
+                        <div class="row mb-3">
+                            <label for="Classes" class="col-sm-2 col-form-label">Classes:</label>
+                            <div class="col-sm-6" id="classes">
+                                <input type="text" class="form-control" id="dtClasses" placeholder="Digite as classes"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="As classes a serem usadas na anotação">
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" id="addClass" class="btn btn-primary float-start">Adicionar
+                                    Classe</button>
+                            </div>
+                            <small id="classMsg1" class="form-text w-50 ms-5 ps-4" hidden>Pelo menos uma classe precisa
+                                ser
+                                adicionada</small>
+                            <small id="classMsg2" class="form-text w-50" hidden>Digite uma classe</small>
+                        </div>
 
-                </div>
+                        <div class="row mb-3 col-sm-6 addClasses" id='addedClasses'>
 
-                <button type="button" id="begin" class="btn btn-primary col-sm-3">Iniciar</button>
-            </form>
-        </main>
+                        </div>
+
+                        <button type="button" id="begin" class="btn btn-primary col-sm-3">Iniciar</button>
+                    </form>
+                </main>
+            </div>
+            <div class="tab-pane fade" id="carregar" role="tabpanel" aria-labelledby="carregar-tab">
+                <main class="px-3">
+                    <form>
+
+                        <div class="row mb-3">
+                            <label for="Recentes" class="col-sm-2 col-form-label">Anotações Recentes:</label>
+                            <div class="col-sm-6" id="recentes">
+
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="Arquivos" class="col-sm-2 col-form-label">Diretório dos Áudios:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="dirPathLoad" placeholder="./"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="Caminho para o diretório dos áudios" disabled>
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="fileSelecter2" type="button" class="btn btn-primary float-start">Escolha o
+                                    diretório</button>
+                            </div>
+                            <small id="dirMsg" class="form-text w-50 ms-2 ps-5" hidden>Um diretório precisa ser
+                                selecionado</small>
+                        </div>
+                    </form>
+                </main>
+            </div>
+        </div>
 
     </div>
+
 
 
     <script defer src="../js/home.js"></script>
