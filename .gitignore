@@ -1,7 +1,7 @@
 #Modulos dos Electron
 node_modules/
 package-lock.json
-temp/
+out/
 
 #Audios
 *.wav

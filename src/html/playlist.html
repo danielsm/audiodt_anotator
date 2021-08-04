@@ -1,3 +1,5 @@
+<!-- Autor: Daniel Moraes -->
+<!-- Exibição dos áudios com player nativo e selecter para anotação da classe -->
 <!--playlist.html-->
 
 <!DOCTYPE html>
@@ -12,7 +14,7 @@
     <!--Bootstrap JS -->
 
     <!-- Custom styles for this template -->
-    <link href="../css/cover.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
     <script src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
@@ -21,12 +23,12 @@
     <div class="cover-container d-flex w-100 p-3 mx-auto flex-column bg-dark rounded center-square">
         <main class="px-3">
             <div class="d-flex flex-column justify-content-center mb-3 d-grid" id="playlist">
-                <!-- Audios -->
+
 
             </div>
 
             <div class="row d-flex mb-3 d-grid">
-                
+
                 <div class="col-sm-7 px-5 d-flex justify-content-end">
                     <button class="btn" type="button" id="prev">
                         <img src="../../assets/arrow-left.svg" alt="home" width="30" height="24"
@@ -48,7 +50,23 @@
             </div>
 
         </main>
+        <!-- Modal -->
+        <div class="modal fade" id="csvExport" tabindex="-1" aria-labelledby="alertModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notDirLabel">Aviso</h5>
+                    </div>
+                    <div class="modal-body">
+                        Arquivo CSV gerado com sucesso.
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script defer src="../js/playlist.js"></script>

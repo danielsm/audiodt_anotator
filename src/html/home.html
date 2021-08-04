@@ -1,3 +1,5 @@
+<!-- Autor: Daniel Moraes -->
+<!-- Formulário de Nova anotação e Carregar Anotação Recente -->
 <!--home.html-->
 
 <!DOCTYPE html>
@@ -12,7 +14,7 @@
     <!--Bootstrap JS -->
 
     <!-- Custom styles for this template -->
-    <link href="../css/cover.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
     <script src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
@@ -96,28 +98,30 @@
 
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="Arquivos" class="col-sm-2 col-form-label">Diretório dos Áudios:</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="dirPathLoad" placeholder="./"
-                                    data-toggle="tooltip" data-placement="top"
-                                    title="Caminho para o diretório dos áudios" disabled>
-                            </div>
-                            <div class="col-sm-3">
-                                <button id="fileSelecter2" type="button" class="btn btn-primary float-start">Escolha o
-                                    diretório</button>
-                            </div>
-                            <small id="dirMsg" class="form-text w-50 ms-2 ps-5" hidden>Um diretório precisa ser
-                                selecionado</small>
-                        </div>
+
                     </form>
                 </main>
             </div>
         </div>
 
+
+        <!-- Modal -->
+        <div class="modal fade" id="notWAV" tabindex="-1" aria-labelledby="alertModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notDirLabel">Aviso</h5>
+                    </div>
+                    <div class="modal-body">
+                        Diretório informado não possui arquivos <strong>.WAV</strong>.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 
     <script defer src="../js/home.js"></script>
 </body>

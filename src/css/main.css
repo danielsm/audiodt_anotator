@@ -32,6 +32,9 @@ body {
   
 }
 
+.modal {
+  color: #333;
+}
 .cover-container {
 
   max-width: 75em;
