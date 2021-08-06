@@ -18,4 +18,4 @@ Para rodar a aplicação use o comando:
 npm start
 ```
 
-A documentação detalhada está em (./PFP_Daniel_Moraes_Documentacao.pdf)
+[Documentação] (https://github.com/danielsm/audiodt_anotator/PFP_Daniel_Moraes_Documentacao.pdf)
